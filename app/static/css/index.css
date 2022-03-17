@@ -1,0 +1,8 @@
+.jumbotron {
+    background-color:white!important;
+    background-image: url(../img/pitch.png)!important;
+    background-repeat: no-repeat;
+    color: whitesmoke;
+    padding: 100px 25px;
+    font-family: 'Lora', serif;
+}
