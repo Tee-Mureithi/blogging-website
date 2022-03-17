@@ -1,6 +1,6 @@
 from flask import render_template,request,redirect,url_for,abort
 from . import main
-from ..models import User,Pitch,Comment
+from ..models import Blog, User,Pitch,Comment
 from .. import db,photos
 from .forms import UpdateProfile,PitchForm,CommentForm
 from flask_login import login_required,current_user
@@ -17,23 +17,23 @@ def index():
     title = 'Home - Welcome to Perfect Pitch'
 
     # Getting reviews by category
-    interview_piches = Pitch.get_pitches('interview')
-    product_piches = Pitch.get_pitches('product')
-    promotion_pitches = Pitch.get_pitches('promotion')
+    lifestyle_blog = Blog.get_blogs('lifestle')
+    motivation_blog = Blog.get_blogs('motivation')
+    mentalhealth_blog = Blog.blogs('mentalhealth')
 
 
-    return render_template('index.html',title = title, interview = interview_piches, product = product_piches, promotion = promotion_pitches)
+    return render_template('index.html',title = title, lifestle = lifestyle_blog, motivation = motivation_blog, mentalhealth = mentalhealth_blog)
 
 @main.route('/user/<uname>')
 def profile(uname):
     user = User.query.filter_by(username = uname).first()
-    pitches_count = Pitch.count_pitches(uname)
+    blogs_count = Blog.count_blogs(uname)
     user_joined = user.date_joined.strftime('%b %d, %Y')
 
     if user is None:
         abort(404)
 
-    return render_template("profile/profile.html", user = user,pitches = pitches_count,date = user_joined)
+    return render_template("profile/profile.html", user = user,pitches = blogs_count,date = user_joined)
 
 @main.route('/user/<uname>/update',methods = ['GET','POST'])
 @login_required
@@ -65,58 +65,58 @@ def update_pic(uname):
         db.session.commit()
     return redirect(url_for('main.profile',uname=uname))
 
-@main.route('/pitch/new', methods = ['GET','POST'])
+@main.route('/blog/new', methods = ['GET','POST'])
 @login_required
-def new_pitch():
-    pitch_form = PitchForm()
-    if pitch_form.validate_on_submit():
-        title = pitch_form.title.data
-        pitch = pitch_form.text.data
-        category = pitch_form.category.data
+def new_blog():
+    blog_form = PitchForm()
+    if blog_form.validate_on_submit():
+        title = blog_form.title.data
+        blog = blog_form.text.data
+        category = blog_form.category.data
 
         # Updated pitch instance
-        new_pitch = Pitch(pitch_title=title,pitch_content=pitch,category=category,user=current_user,likes=0,dislikes=0)
+        new_blog = Blog(blog_title=title,blog_content=blog,category=category,user=current_user,likes=0,dislikes=0)
 
         # Save pitch method
-        new_pitch.save_pitch()
+        new_blog.save_blog()
         return redirect(url_for('.index'))
 
-    title = 'New pitch'
-    return render_template('new_pitch.html',title = title,pitch_form=pitch_form )
+    title = 'New blog'
+    return render_template('new_blog.html',title = title,blog_form=blog_form )
 
-@main.route('/pitches/interview_pitches')
-def interview_pitches():
+@main.route('/blogs/lifestyle_blogs')
+def lifestyle_blogs():
 
-    pitches = Pitch.get_pitches('interview')
+    blogs = Blog.get_blogs('lifestyle')
 
-    return render_template("interview_pitches.html", pitches = pitches)
+    return render_template("lifestyle_blogs.html", blogs = blogs)
 
-@main.route('/pitches/product_pitches')
-def product_pitches():
+@main.route('/blogs/motivation_blogs')
+def motivation_blogs():
 
-    pitches = Pitch.get_pitches('product')
+    blogs = Blog.get_blogs('motivation')
 
-    return render_template("product_pitches.html", pitches = pitches)
+    return render_template("motivation_blogs.html", blogs = blogs)
 
-@main.route('/pitches/promotion_pitches')
-def promotion_pitches():
+@main.route('/blogs/mentalhealth')
+def mentalhealth():
 
-    pitches = Pitch.get_pitches('promotion')
+    blogs = Blog.get_blogs('mentalhealth')
 
-    return render_template("promotion_pitches.html", pitches = pitches)
+    return render_template("mentalhealth.html", blogs = blogs)
 
-@main.route('/pitch/<int:id>', methods = ['GET','POST'])
-def pitch(id):
-    pitch = Pitch.get_pitch(id)
-    posted_date = pitch.posted.strftime('%b %d, %Y')
+@main.route('/blog/<int:id>', methods = ['GET','POST'])
+def blog(id):
+    blog = Blog.get_blog(id)
+    posted_date = blog.posted.strftime('%b %d, %Y')
 
     if request.args.get("like"):
-        pitch.likes = pitch.likes + 1
+        blog.likes = blog.likes + 1
 
-        db.session.add(pitch)
+        db.session.add(blog)
         db.session.commit()
 
-        return redirect("/pitch/{pitch_id}".format(pitch_id=pitch.id))
+        return redirect("/blog/{blog_id}".format(blog_id=blog.id))
 
     elif request.args.get("dislike"):
         pitch.dislikes = pitch.dislikes + 1
