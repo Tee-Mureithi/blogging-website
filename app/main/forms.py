@@ -5,11 +5,13 @@ from wtforms import StringField,TextAreaField,SubmitField,SelectField
 #from wtforms.validators import Required
 
 
-class PitchForm(FlaskForm):
+class BlogForm(FlaskForm):
 
-    title = StringField('Pitch title')
+    title = StringField('Blog title')
     text = TextAreaField('Text')
-    category = SelectField('Type',choices=[('interview','Interview pitch'),('product','Product pitch'),('promotion','Promotion pitch')])
+    category = SelectField('Type',choices=[('lifestyle','LIfestyle blog'),('motivation','Motivation blog'),('mental-health','Mental-health pitch')])
+
+
     submit = SubmitField('Submit')
 
 class UpdateProfile(FlaskForm):
