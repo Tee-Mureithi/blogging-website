@@ -87,21 +87,21 @@ def new_blog():
 @main.route('/blogs/lifestyle_blogs')
 def lifestyle_blogs():
 
-    blogs = Blog.get_blogs('lifestyle')
+    blogs = Blog.get_blog('lifestyle')
 
     return render_template("lifestyle_blogs.html", blogs = blogs)
 
 @main.route('/blogs/motivation_blogs')
 def motivation_blogs():
 
-    blogs = Blog.get_blogs('motivation')
+    blogs = Blog.get_blog('motivation')
 
     return render_template("motivation_blogs.html", blogs = blogs)
 
 @main.route('/blogs/mentalhealth')
 def mentalhealth():
 
-    blogs = Blog.get_blogs('mentalhealth')
+    blogs = Blog.get_blog('mentalhealth')
 
     return render_template("mentalhealth.html", blogs = blogs)
 
