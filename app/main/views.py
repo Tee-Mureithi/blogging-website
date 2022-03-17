@@ -1,6 +1,6 @@
 from flask import render_template,request,redirect,url_for,abort
 from . import main
-from ..models import Blog, User,Blog,Comment
+from ..models import  User,Blog,Comment
 from .. import db,photos
 from .forms import UpdateProfile,BlogForm,CommentForm
 from flask_login import login_required,current_user
@@ -17,9 +17,9 @@ def index():
     title = 'Home - Welcome to Blogging Website'
 
     # Getting reviews by category
-    lifestyle_blog = Blog.get_blogs('lifestyle')
-    motivation_blog = Blog.get_blogs('motivation')
-    mentalhealth_blog = Blog.get_blogs('mentalhealth')
+    lifestyle_blog = Blog.get_blog('lifestyle')
+    motivation_blog = Blog.get_blog('motivation')
+    mentalhealth_blog = Blog.get_blog('mentalhealth')
 
 
     return render_template('index.html',title = title, lifestle = lifestyle_blog, motivation = motivation_blog, mentalhealth = mentalhealth_blog)
@@ -28,7 +28,7 @@ def index():
 def profile(uname):
     user = User.query.filter_by(username = uname).first()
     blogs_count = Blog.count_blogs(uname)
-    user_joined = User.date_joined.strftime('%b %d, %Y')
+    user_joined = user.date_joined.strftime('%b %d, %Y')
 
     if user is None:
         abort(404)
