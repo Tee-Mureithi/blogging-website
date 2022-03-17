@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% import 'macros.html' as macro %}
+<link rel="stylesheet" href="{{url_for('static',filename='css/index.css')}}">
+
+{%block content%}
+<link href="https://fonts.googleapis.com/css?family=Lora&display=swap" rel="stylesheet">
+<div class="jumbotron text-center" style="background-color:white; color: black;  background-repeat: no-repeat; padding-top:20px 20px; margin: 50px; ">
+    <style>
+        *{
+            font-family: sans-serif;
+        }
+    </style>
+    <h1>📚LIfestyle Blogs</h1>
+</div>
+<div class="container" style="font-family: 'Lora', serif;">
+    <hr>
+    <div class="row">
+        {{macro.displayPitches(pitches)}}
+    </div>
+</div>
+{%endblock%}

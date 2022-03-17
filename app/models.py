@@ -1,4 +1,4 @@
-from app.main.forms import BlogForm
+# from app.main.forms import BlogForm
 from . import db
 from werkzeug.security import generate_password_hash,check_password_hash
 from flask_login import UserMixin
@@ -52,7 +52,7 @@ class Blog(db.Model):
     likes = db.Column(db.Integer)
     dislikes = db.Column(db.Integer)
 
-    comments = db.relationship('Comment',backref =  'pitch_id',lazy = "dynamic")
+    comments = db.relationship('Comment',backref =  'blog_id',lazy = "dynamic")
 
     def save_blog(self):
         db.session.add(self)

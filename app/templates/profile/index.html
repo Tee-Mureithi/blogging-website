@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+{% import 'macros.html' as macro %}
+<!-- Styles block -->
+
+{%block styles%}
+    {{ super() }}
+    <link rel="stylesheet" href="{{url_for('static',filename='css/index.css')}}">
+     <style>
+         *{
+             font-family:sans-serif!important;
+         }
+     </style>    
+{%endblock%}
+<!-- Content block -->
+{%block content%}
+<div class="jumbotron text-center" style="background-color: white; color: whitesmoke; padding-top:20px 20px; margin: 50px; font-family: 'Lora', serif;">
+    <!--Header-->
+    <br><br><br><br><br>
+</div>
+<div class="container" style="padding-bottom: 20px;">
+    <a href="{{url_for('main.new_blog')}}" class="btn btn-dark">➕ Create Blog</a>
+</div>
+
+<div class="container" style= "font-family: 'Lora', serif">
+    <div class="row">
+        <div class="col-md-4">
+            <div class="well well-lg" style="background-color:white!important;">
+                <img src="{{url_for('static', filename='./img/interview.png')}}" align="middle" height="100px" width="130px" />
+                <h3>LIfestyle Pitches</h3>
+                <p>Write a blog about lifestyle welcome.</p>
+                <a href="{{url_for('main.lifestyle_blogs')}}" class="btn btn-dark -center">View</a>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="well well-lg"  style="background-color:white!important;" >
+                <img src="{{url_for('static', filename='./img/product.png')}}" align="middle" height="100px" width="130px" />
+                <h3>Motivation Blog</h3>
+                <p>Write a motivating blog.</p>
+                <a href="{{url_for('main.motivation_blogs')}}" class="btn btn-dark -center">View</a>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="well well-lg"  style="background-color:white!important;" >
+                <img src="{{url_for('static', filename='./img/promotion.png')}}" align="middle" height="100px" width="130px" />
+                <h3>Mental Health</h3>
+                <p>Want to promote anything, step right up and begin.</p>
+                <a href="{{url_for('main.mentalhealth_pitches')}}" class="btn btn-dark -center">View</a>
+            </div>
+        </div>
+    </div>
+</div>
+{%endblock%}
