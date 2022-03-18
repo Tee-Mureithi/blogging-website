@@ -22,7 +22,7 @@ def index():
     mentalhealth_blog = Blog.get_blog('mentalhealth')
 
 
-    return render_template('index.html',title = title, lifestle = lifestyle_blog, motivation = motivation_blog, mentalhealth = mentalhealth_blog)
+    return render_template('profile/index.html',title = title, lifestle = lifestyle_blog, motivation = motivation_blog, mentalhealth = mentalhealth_blog)
 
 @main.route('/user/<uname>')
 def profile(uname):
