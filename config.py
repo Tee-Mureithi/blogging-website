@@ -6,7 +6,7 @@ class Config:
     '''
     # SECRET_KEY = os.environ.get('SECRET_KEY')
     SECRET_KEY='bubbles'
-    DATABASE_URL='postgresql+psycopg2://postgres:o7oKanyi@localhost:5000/minutepitch'
+    DATABASE_URL='postgresql+psycopg2://postgres:o7oKanyi@localhost:5000/blogs'
     UPLOADED_PHOTOS_DEST ='app/static'
     SQLALCHEMY_TRACK_MODIFICATIONS = True
     # email configurations
@@ -32,7 +32,7 @@ class TestConfig(Config):
     Args:
         Config: The parent configuration class with General configuration settings
     '''
-    SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://postgres:o7oKanyi@localhost/pitch'
+    SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://postgres:o7oKanyi@localhost/blog'
 
 class DevConfig(Config):
     '''
@@ -41,7 +41,7 @@ class DevConfig(Config):
     Args:
         Config: The parent configuration class with General configuration settings
     '''
-    SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://postgres:o7oKanyi@localhost/minutepitch'
+    SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://postgres:o7oKanyi@localhost/blogs'
 
     DEBUG = True
     ENV = 'development'

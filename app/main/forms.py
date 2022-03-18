@@ -9,7 +9,7 @@ class BlogForm(FlaskForm):
 
     title = StringField('Blog title')
     text = TextAreaField('Text')
-    category = SelectField('Type',choices=[('lifestyle','LIfestyle blog'),('motivation','Motivation blog'),('mental-health','Mental-health pitch')])
+    category = SelectField('Type',choices=[('lifestyle','LIfestyle blog'),('motivation','Motivation blog'),('mentalhealth','Mentalhealth blog')])
 
 
     submit = SubmitField('Submit')
